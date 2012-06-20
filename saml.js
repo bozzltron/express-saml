@@ -52,8 +52,9 @@ function routes(app, db) {
       var date = new Date();
       
       var issue_instant = date.getUTCFullYear() + '-' + ('0' + (date.getUTCMonth()+1)).slice(-2) + '-' + ('0' + date.getUTCDate()).slice(-2) + 'T' + ('0' + (date.getUTCHours()+2)).slice(-2) + ":" + ('0' + date.getUTCMinutes()).slice(-2) + ":" + ('0' + date.getUTCSeconds()).slice(-2) + "Z";
-     
-      var const_assertion_consumer_service_url = '/admin/saml/consume';
+      var http = "http://";
+      var https = "https://";
+      var const_assertion_consumer_service_url = https + req.headers.host;  // Post auth destination
       var const_issuer = "onelogin_saml";
       var const_name_identifier_format = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress";
       var request =
