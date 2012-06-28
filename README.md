@@ -20,7 +20,7 @@ Now you can secure your site like this: *Note : I am using express framework
       if(req.session.currentUser){
         next();
       }else{
-        app.settings.saml.startAuth(res);
+        app.settings.saml.startAuth(req, res);
       }
     }
   
