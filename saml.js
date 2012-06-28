@@ -7,10 +7,13 @@ function routes(app, db) {
     
     var libxmljs = require("libxmljs");
     
+    // Get SAML response
     var samlResponse = req.body.SAMLResponse;
     
+    // Decode response
     var xml = new Buffer(samlResponse, 'base64').toString('ascii');
     
+    // Parse ID
     var xmlDoc = libxmljs.parseXmlString(xml);
     var idNode = xmlDoc.get('/samlp:Response/saml:Assertion/saml:Subject/saml:NameID', {
       'samlp':'urn:oasis:names:tc:SAML:2.0:protocol',
@@ -19,14 +22,19 @@ function routes(app, db) {
     
     var email = idNode.text();
     
+    // User lookup
     app.settings.models.User.findOne({email:email}, function(err, user){
       
       if (user) {
+          
+        // Grant session
         req.session.currentUser = user;
         req.flash('info', 'You are logged in as ' + email);
         res.redirect('/');
         return;
       } else {
+          
+        // Redirect
         req.flash('error', 'Your account did not match any of our records.');
         res.redirect('/login');
         return;
@@ -39,7 +47,10 @@ function routes(app, db) {
   // Use this psuedo class to initiate the SAML Request
   var SAML = {
     
+    // Initiate SAML authentication
     startAuth: function(res) {
+        
+      // Generate a unique ID
       var chars = "abcdef0123456789";
       var chars_len = chars.length;
       var uniqueID = "";
@@ -51,6 +62,7 @@ function routes(app, db) {
  
       var date = new Date();
       
+      // Setup SAML request
       var issue_instant = date.getUTCFullYear() + '-' + ('0' + (date.getUTCMonth()+1)).slice(-2) + '-' + ('0' + date.getUTCDate()).slice(-2) + 'T' + ('0' + (date.getUTCHours()+2)).slice(-2) + ":" + ('0' + date.getUTCMinutes()).slice(-2) + ":" + ('0' + date.getUTCSeconds()).slice(-2) + "Z";
       var http = "http://";
       var https = "https://";
@@ -67,13 +79,16 @@ function routes(app, db) {
          
       var zlib = require('zlib');
 
+      // Encode with deflate
       zlib.deflateRaw(request, function(err, buffer) {
         if (!err) {
           
           var deflated_request = buffer;
               
+          // Base64 encode
           var base64_request   = deflated_request.toString('base64');
     
+          // URI encode
           var encoded_request  = encodeURIComponent(base64_request);
           
           // Get api key
