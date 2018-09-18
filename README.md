@@ -4,7 +4,7 @@ express-saml
 SAML authentication support of node.js express framework
 
 
-##Usage:
+## Usage:
 
 Add this to server.js
 
