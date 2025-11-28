@@ -1,0 +1,61 @@
+{
+  "name": "@bozzltron/express-saml",
+  "version": "2.0.0",
+  "description": "Modern SAML 2.0 authentication middleware for Express.js with TypeScript support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/example/server.ts",
+    "start": "node dist/example/server.js",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "saml",
+    "saml2",
+    "sso",
+    "authentication",
+    "express",
+    "middleware",
+    "typescript",
+    "identity-provider",
+    "service-provider"
+  ],
+  "author": "Michael Bosworth <michael@bozzltron.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bozzltron/express-saml.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "xml-crypto": "^6.0.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
+    "@types/node": "^20.11.0",
+    "@types/supertest": "^6.0.2",
+    "@types/xml2js": "^0.4.14",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
+    "supertest": "^6.3.3",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  }
+}
+

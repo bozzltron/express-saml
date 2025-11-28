@@ -1,0 +1,42 @@
+# Development files
+src/
+*.test.ts
+*.spec.ts
+tsconfig.json
+vitest.config.ts
+.eslintrc.json
+.prettierrc
+
+# Documentation (keep in npm package)
+# docs/
+
+# Example code (keep in npm package)
+# src/example/
+
+# Environment and config
+.env
+.env.*
+!.env.template
+!.env.example
+
+# Build artifacts
+*.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Development
+node_modules/
+.vscode/
+.idea/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
